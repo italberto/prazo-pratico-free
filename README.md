@@ -1,2 +1,9 @@
-# sigaa-ufpi-lembrete
-Web App para ter um acesso resposnsivo as atividades abertas dentro do sigaa.
+# sigaa-ufpi-reminder
+It is a Wep Aplication for acess deadlines to evaluative activities in SIGAA portal at UFPI, via a responsive layout.
+
+### Used technologies
+- Webapp2
+- Python 2.7
+- Jinja2
+- Urllib2
+- Google App Engine
