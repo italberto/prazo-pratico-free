@@ -1,5 +1,5 @@
 # sigaa-ufpi-reminder
-It is a Wep Aplication for acess deadlines to evaluative activities in SIGAA portal at UFPI, via a responsive layout.
+It is a Web Aplication for acess deadlines to evaluative activities in SIGAA portal at UFPI, via a responsive layout.
 
 ### Used technologies
 - Webapp2
