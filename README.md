@@ -7,3 +7,6 @@ It is a Web Aplication for acess deadlines to evaluative activities in SIGAA por
 - Jinja2
 - Urllib2
 - Google App Engine
+- Html5
+- CSS
+- Grid CSS
