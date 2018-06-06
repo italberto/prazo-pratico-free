@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="wellcome-login">
+        <p>Faça login e tenha acesso facilitado a todos os seus prazos.</p>
+
+        <form class="login-form" method="post">
+
+            <label for="username">
+                Usuário<br>
+                <input id="usename" type="text" name="username" required value="">
+            </label>
+
+            <label for="password">
+                <br>Senha<br>
+                <input id="password" type="password" name="password" rquired value="">
+            </label>
+            <button type="submit" > Entrar </button>
+
+            <span>{{ error }}</span>
+        </form>
+    </div>
+{% endblock %}
