@@ -1,23 +1,21 @@
-import urllib2
+import urllib2, urllib
 
 def generate_new_cookie():
     """return a valid virgin cookie"""
     response = urllib2.urlopen('https://sigaa.ufpi.br/sigaa/verTelaLogin.do')
+    print response.info()['Set-Cookie']
     return response.info()['Set-Cookie']
 
-def login(cookie, username, password):
-    """"""
-    query_args = { 'q':'query string', 'foo':'bar' }
+def login(username, password):
+    cookie = generate_new_cookie().split(';')[0]
+    url = 'http://sigaa.ufpi.br/sigaa/logar.do?dispatch=logOn'
+    query = {'user.login':username, 'user.senha':password}
+    data = urllib.urlencode(query)
 
-    # This urlencodes your data (that's why we need to import urllib at the top)
-    data = urllib.urlencode(query_args)
-
-    # Send HTTP POST request
     request = urllib2.Request(url, data)
+    request.add_header("Cookie", cookie)
 
-    response = urllib2.urlopen(request)
+    html = urllib2.urlopen(request).read()
 
-    html = response.read()
-
-    # Print the result
-    print html
+    if "rio e/ou senha inv" not in html:
+        return html
