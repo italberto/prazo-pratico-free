@@ -1,6 +1,19 @@
 {% extends 'base_logged.html' %}
 {% block logged %}
 
+    {% for classe in classes %}
+        <div class="classes">
+            <h3>{{ classe['name'] }}</h3>
+
+            {% for activity in classe['activities'] %}
+                <div>
+                    <p> - {{ activity['name'] | safe}}<p>
+                    <p>Per&#237;odo de Habilita&#231;&#227;o:</span>26/02/2018 &agrave;s 00:00a08/04/2018 &agrave;s 23:59</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    {% endfor %}
 
 
 {% endblock %}

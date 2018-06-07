@@ -40,7 +40,7 @@ class LoginPage(webapp2.RequestHandler):
             login = sigaa.login(username, password)
             #if user or password is wrong
             if login:
-                login_json = json.dumps(login).replace('\\r', ' ').replace('\\t', '')
+                login_json = json.dumps(login).replace('\\r', '').replace('\\t', '').replace('\\n', '').replace('</span>', '')
 
                 #verificar se ja tem cadastro
                 user_verify = db.GqlQuery("SELECT * FROM User WHERE username = \'" + username + "\'").get()
@@ -70,7 +70,7 @@ class Home(webapp2.RequestHandler):
             user_consult = db.GqlQuery("SELECT * FROM User WHERE username = \'" + username + "\'").get()
             user = json.loads(user_consult.json_data)
             t = jinja_env.get_template('home.html')
-            self.response.out.write(t.render(username=user['username']))
+            self.response.out.write(t.render(username=user['username'], classes= user['classes']))
             pass
 
 

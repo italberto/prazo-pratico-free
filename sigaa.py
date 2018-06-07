@@ -32,7 +32,7 @@ def get_class_html(cookie, id):
             activity['name'] = activity_html[activity_html_i:activity_html_f]
 
             #extrair date_hora
-            activity_html_i = activity_html.find('<span>') + 9
+            activity_html_i = activity_html.find('<span>') + 6
             activity_html_f = activity_html.find('</div>')
             activity['prazo'] = activity_html[activity_html_i:activity_html_f]
 
@@ -65,7 +65,6 @@ def get_classes_info(html_home, cookie):
 
     for class_html in classes_html_elements:
         class_obj = {} # class object
-        class_obj['activities'] = [] #activities list
 
         #class id extrating
         class_html_i = class_html.find('<input type="hidden" value="') + 28
@@ -77,7 +76,7 @@ def get_classes_info(html_home, cookie):
         class_html_j = class_html.find('</a><input type="hidden"')
         class_obj['name'] = class_html[class_html_i:class_html_j]
 
-        class_obj['activities'].append(get_class_html(cookie, class_obj['id']))
+        class_obj['activities'] = get_class_html(cookie, class_obj['id'])
 
         classes.append(class_obj)
     return classes
