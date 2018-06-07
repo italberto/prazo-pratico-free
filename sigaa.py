@@ -1,6 +1,63 @@
 import urllib2, urllib
+import HTMLParser
 
-def get_classes_info(html_home):
+def get_class_html(cookie, id):
+    """Retorna um dicionario"""
+
+    url = 'http://sigaa.ufpi.br/sigaa/ufpi/portais/discente/discente.jsf'
+    query = {'form_acessarTurmaVirtual':'form_acessarTurmaVirtual',
+        'idTurma':id,
+        'javax.faces.ViewState':'j_id1',
+        'form_acessarTurmaVirtual:turmaVirtual':'form_acessarTurmaVirtual:turmaVirtual',}
+    data = urllib.urlencode(query)
+    request = urllib2.Request(url, data)
+    request.add_header("Cookie", cookie)
+    html = urllib2.urlopen(request).read()
+
+    #lista de elementos de atividades nao filtradas
+    atividades_list_html_not = html.split('<a id="formAva:j_id_jsp_')
+    #lista de lementos filtrados
+    activities = []
+
+    for activity_html in atividades_list_html_not:
+
+        activity = {} #activity object
+
+        #Para foruns
+        if 'idMostrarForum' in activity_html:
+
+            #extrair nome do forum
+            activity_html_i = activity_html.find('return false">') + 14
+            activity_html_f = activity_html.find('</a>')
+            activity['name'] = activity_html[activity_html_i:activity_html_f]
+
+            #extrair date_hora
+            activity_html_i = activity_html.find('<span>') + 9
+            activity_html_f = activity_html.find('</div>')
+            activity['prazo'] = activity_html[activity_html_i:activity_html_f]
+
+            #acicionando a lista de atividades
+            activities.append(activity)
+
+        #para atividades
+        elif 'idEnviarMaterial' in activity_html:
+            #extrair nome da atividade
+            activity_html_i = activity_html.find('return false">') + 14
+            activity_html_f = activity_html.find('</a>')
+            activity['name'] = activity_html[activity_html_i:activity_html_f]
+
+            #extrair date_hora
+            activity_html_i = activity_html.find('">Inicia em') + 2
+            activity_html_f = activity_html.find('</div>')
+            activity['prazo'] = activity_html[activity_html_i:activity_html_f]
+
+            #acicionando a lista de atividades
+            activities.append(activity)
+    #se atividades forem encontradas entao retorneas, caso nao encontrar, none
+    if activities:
+        return activities
+
+def get_classes_info(html_home, cookie):
     """return classes objects exhtracted from homepage_html"""
     #list of class elements
     classes = []
@@ -8,6 +65,8 @@ def get_classes_info(html_home):
 
     for class_html in classes_html_elements:
         class_obj = {} # class object
+        class_obj['activities'] = [] #activities list
+
         #class id extrating
         class_html_i = class_html.find('<input type="hidden" value="') + 28
         class_html_j = class_html.find('" name="idTurma" />')
@@ -17,6 +76,8 @@ def get_classes_info(html_home):
         class_html_i = class_html.find('return false">') + 14
         class_html_j = class_html.find('</a><input type="hidden"')
         class_obj['name'] = class_html[class_html_i:class_html_j]
+
+        class_obj['activities'].append(get_class_html(cookie, class_obj['id']))
 
         classes.append(class_obj)
     return classes
@@ -46,6 +107,8 @@ def login(username, password):
         username_f = html.find('", //pode ser retornado por funcao ou uma string')
 
         user['username'] = html[username_i:username_f]
-        user['classes'] = get_classes_info(html)
+        user['classes'] = get_classes_info(html, cookie)
+        user['cookie'] = cookie
+
 
         return user

@@ -6,9 +6,15 @@ import base64
 #funcoes de login
 import sigaa
 
+from google.appengine.ext import db
+
 #settings for configurate the render templates html
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
+
+class User(db.Model):
+    username = db.StringProperty(required=True)
+    json_data = db.TextProperty(required=True)
 
 class MainPage(webapp2.RequestHandler):
     """index page"""
@@ -34,8 +40,21 @@ class LoginPage(webapp2.RequestHandler):
             login = sigaa.login(username, password)
             #if user or password is wrong
             if login:
-                login_json = json.dumps(login)
-                self.response.headers['Set-Cookie'] = 'user='+base64.b64encode(login_json)
+                login_json = json.dumps(login).replace('\\r', ' ').replace('\\t', '')
+
+                #verificar se ja tem cadastro
+                user_verify = db.GqlQuery("SELECT * FROM User WHERE username = \'" + username + "\'").get()
+                #se ja tiver cadastro
+                if user_verify:
+                    user_verify.username = username
+                    user_verify.json_data = login_json
+                    user_verify.put()
+                else:
+                    user = User(username=username, json_data=login_json)
+                    user.put()
+
+                self.response.headers['Set-Cookie'] = 'user=' + username.encode("utf-8")
+                self.response.out.write('Logando...')
                 self.redirect('/home')
 
             else:
@@ -44,13 +63,14 @@ class LoginPage(webapp2.RequestHandler):
 
 class Home(webapp2.RequestHandler):
     def get(self):
-        cookie_value = self.request.cookies.get('user')
-        cookie_value = base64.b64decode(cookie_value)
-        cookie = json.loads(cookie_value)
-        print cookie
+        username = self.request.cookies.get('user')
+        #cookie_value = base64.b64decode(cookie_value)
 
-        if cookie_value:
-
+        if username:
+            user_consult = db.GqlQuery("SELECT * FROM User WHERE username = \'" + username + "\'").get()
+            user = json.loads(user_consult.json_data)
+            t = jinja_env.get_template('home.html')
+            self.response.out.write(t.render(username=user['username']))
             pass
 
 
