@@ -4,6 +4,7 @@
     font-family: sans-serif;
 }
 
+/*para tela menores 543px*/
 .container {
     min-height: 100vh;
     display: grid;
@@ -69,7 +70,7 @@
     padding: 10px;
 }
 .classes p{
-    font-size: 0.7em;
+    font-size: 15px;
 }
 
 
@@ -83,4 +84,26 @@
 .footer a {
     text-decoration: none;
     color: white;
+}
+
+@media (min-width:544px) {
+
+}
+
+@media (min-width:768px) {
+    .content{
+        display: grid;
+        grid-template: none/ repeat(20, 1fr);
+        grid-row: 2 / 2;
+        grid-column: 2 / -2;
+        margin-top: 20px;
+    }
+
+    .classes h3{
+        font-size: 23px;
+    }
+    .classes p{
+        font-size: 20px;
+    }
+
 }
