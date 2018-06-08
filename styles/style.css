@@ -113,12 +113,11 @@
 
 
 .footer {
-    padding: 15px;
     background-color: black;
-    grid-row: 3/ -1;
     grid-column: 1 / -1;
-    align-self: baseline;
+    grid-row: 3 / -1;
     text-align: center;
+    padding: 20px;
 }
 .footer a{
     text-decoration: none;

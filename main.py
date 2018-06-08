@@ -64,17 +64,28 @@ class LoginPage(webapp2.RequestHandler):
 class Home(webapp2.RequestHandler):
     def get(self):
         username = self.request.cookies.get('user')
+        print 'USERNAME = ' + username
         #cookie_value = base64.b64decode(cookie_value)
 
+        #if we have a valid cookie
         if username:
             user_consult = db.GqlQuery("SELECT * FROM User WHERE username = \'" + username + "\'").get()
             user = json.loads(user_consult.json_data)
             t = jinja_env.get_template('home.html')
             self.response.out.write(t.render(username=user['username'], classes= user['classes']))
-            pass
+        else:
+            self.redirect('/login')
+
+class LogOut(webapp2.RequestHandler):
+    """To make logout of the account, and clean the document.cookie"""
+    def get(self):
+        self.response.headers['Set-Cookie'] = ''
+        self.response.out.write('')
+        self.redirect('/')
 
 
 
 
 
-app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/home', Home)])
+
+app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/home', Home), ('/logout', LogOut)])
