@@ -64,7 +64,6 @@ class LoginPage(webapp2.RequestHandler):
 class Home(webapp2.RequestHandler):
     def get(self):
         username = self.request.cookies.get('user')
-        print 'USERNAME = ' + username
         #cookie_value = base64.b64decode(cookie_value)
 
         #if we have a valid cookie
