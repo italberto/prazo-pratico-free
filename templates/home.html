@@ -7,8 +7,17 @@
 
             {% for activity in classe['activities'] %}
                 <div>
-                    <p> - {{ activity['name'] | safe}}</p><br>
-                    <p>{{activity['prazo'] | safe}}</p>
+
+                    <p>
+                        <img src='/styles/{{ activity['type'] | safe}}.svg' >{{ activity['name'] | safe}}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        {{activity['deadline'] | safe}}
+                    </p>
+
                 </div>
             {% endfor %}
 

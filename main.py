@@ -1,3 +1,4 @@
+#coding: utf-8
 import os
 import webapp2
 import jinja2
@@ -40,7 +41,7 @@ class LoginPage(webapp2.RequestHandler):
             login = sigaa.login(username, password)
             #if user or password is wrong
             if login:
-                login_json = json.dumps(login).replace('\\r', '').replace('\\t', '').replace('\\n', '').replace('</span>', '')
+                login_json = json.dumps(login)
 
                 #verificar se ja tem cadastro
                 user_verify = db.GqlQuery("SELECT * FROM User WHERE username = \'" + username + "\'").get()

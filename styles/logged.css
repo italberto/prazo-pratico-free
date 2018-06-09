@@ -72,6 +72,9 @@
 .classes p{
     font-size: 15px;
 }
+.classes img {
+    width: 20px;
+}
 
 
 .footer {
@@ -104,6 +107,9 @@
     }
     .classes p{
         font-size: 20px;
+    }
+    .classes img {
+        width: 25px;
     }
 
 }

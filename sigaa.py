@@ -36,9 +36,11 @@ def get_class_html(cookie, id):
             #verify if a deadline exist
             if not(activity_html_i == 5):
                 activity_html_f = activity_html.find('</div>')
-                activity['prazo'] = activity_html[activity_html_i:activity_html_f]
+                activity['deadline'] = activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')
             else:
-                activity['prazo'] = "Nao possui prazo de validade."
+                activity['deadline'] = "Nao possui prazo de validade."
+
+            activity['type'] =  'forum'
 
             #acicionando a lista de atividades
             activities.append(activity)
@@ -53,7 +55,9 @@ def get_class_html(cookie, id):
             #extrair date_hora
             activity_html_i = activity_html.find('">Inicia em') + 2
             activity_html_f = activity_html.find('</div>')
-            activity['prazo'] = activity_html[activity_html_i:activity_html_f]
+            activity['deadline'] = activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')
+
+            activity['type'] = 'assignment'
 
             #acicionando a lista de atividades
             activities.append(activity)
