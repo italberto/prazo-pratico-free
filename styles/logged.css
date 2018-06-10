@@ -74,6 +74,7 @@
 }
 .classes img {
     width: 20px;
+    height: auto;
 }
 
 
@@ -109,7 +110,8 @@
         font-size: 20px;
     }
     .classes img {
-        width: 25px;
+        width: auto;
+        height: 25px;
     }
 
 }

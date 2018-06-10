@@ -1,5 +1,6 @@
+#coding: utf-8
 import urllib2, urllib
-import HTMLParser
+from HTMLParser import HTMLParser
 
 def get_class_html(cookie, id):
     """Retorna um dicionario"""
@@ -13,6 +14,9 @@ def get_class_html(cookie, id):
     request = urllib2.Request(url, data)
     request.add_header("Cookie", cookie)
     html = urllib2.urlopen(request).read()
+
+    #to unescape the html codes in strings
+    unescape = HTMLParser().unescape
 
     #lista de elementos de atividades nao filtradas
     atividades_list_html_not = html.split('<a id="formAva:j_id_jsp_')
@@ -36,11 +40,15 @@ def get_class_html(cookie, id):
             #verify if a deadline exist
             if not(activity_html_i == 5):
                 activity_html_f = activity_html.find('</div>')
-                activity['deadline'] = activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')
+                activity['deadline'] = unescape(activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')).encode('utf-8')
+                print activity['deadline']
+                get_deadline(activity['deadline'], 'forum')
             else:
                 activity['deadline'] = "Nao possui prazo de validade."
 
             activity['type'] =  'forum'
+
+
 
             #acicionando a lista de atividades
             activities.append(activity)
@@ -55,7 +63,10 @@ def get_class_html(cookie, id):
             #extrair date_hora
             activity_html_i = activity_html.find('">Inicia em') + 2
             activity_html_f = activity_html.find('</div>')
-            activity['deadline'] = activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')
+            activity['deadline'] = unescape(activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')).encode('utf-8')
+
+            print activity['deadline']
+            get_deadline(activity['deadline'], 'assignment')
 
             activity['type'] = 'assignment'
 
@@ -119,3 +130,53 @@ def login(username, password):
 
 
         return user
+
+def get_deadline(deadline_str, type):
+    """Returns a dict with the info about the deadline structured init and end"""
+    #init and end return
+    deadlines = {}
+    #init or and
+    deadline = {}
+
+    #for foruns
+    if 'forum' in type:
+        #For foruns deadine init
+        deadline['day']   = int(deadline_str[36:38])
+        deadline['month'] = int(deadline_str[39:41])
+        deadline['year']  = int(deadline_str[42:46])
+        deadline['hour']  = int(deadline_str[51:53])
+        deadline['min']   = int(deadline_str[54:56])
+
+        deadlines['init'] = deadline
+
+        #For foruns deadline end
+        deadline['day']   = int(deadline_str[77:79])
+        deadline['month'] = int(deadline_str[80:82])
+        deadline['year']  = int(deadline_str[83:87])
+        deadline['hour']  = int(deadline_str[92:94])
+        deadline['min']   = int(deadline_str[95:97])
+
+        deadlines['end'] = deadline
+
+    #For activities
+    elif 'assignment' in type :
+        #For activities deadline init
+        deadline['day']   = int(deadline_str[10:12])
+        deadline['month'] = int(deadline_str[13:15])
+        deadline['year']  = int(deadline_str[16:20])
+        deadline['hour']  = int(deadline_str[25:26])
+        deadline['min']   = int(deadline_str[28:29])
+
+
+        deadlines['init'] = deadline
+
+        #For activities deadline end
+        deadline['day']   =  int(deadline_str[44:46])
+        deadline['month'] =  int(deadline_str[47:49])
+        deadline['year']  =  int(deadline_str[50:54])
+        deadline['hour']  =  int(deadline_str[59:61])
+        deadline['min']   =  int(deadline_str[63:65])
+
+        deadlines['end'] = deadline
+
+    return deadlines
