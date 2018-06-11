@@ -4,7 +4,7 @@
     {% for classe in classes %}
 
         <div class="classes">
-            <h3>{{ classe['name'] }}</h3>
+            <h3>{{ classe['name'] | safe }}</h3>
 
             {% for activity in classe['activities'] %}
                 <div class="inside">
