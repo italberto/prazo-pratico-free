@@ -1,4 +1,4 @@
-#coding: utf-8
+#encoding=utf8
 import os
 import webapp2
 import jinja2

@@ -2,6 +2,7 @@
 {% block logged %}
 
     {% for classe in classes %}
+
         <div class="classes">
             <h3>{{ classe['name'] }}</h3>
 
@@ -17,8 +18,8 @@
                     <p>
                         {{activity['deadline'] | safe}}
                     </p>
-                    
-                    {% if not("Não possui prazo de validade." in activity['deadline']) %}
+
+                    {% if not("possui prazo de validade." in activity['deadline']) %}
                         <div id="progressbar">
                             <div style="width: {{ activity['percent_time'][:5] }}%;">{{ activity['percent_time'][:5] }}%</div>
                         </div>
