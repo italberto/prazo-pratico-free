@@ -1,6 +1,5 @@
 import datetime
 import time
-import pytz
 
 def calc_deadline_percent(deadlines):
     """

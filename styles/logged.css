@@ -76,10 +76,10 @@
 }
 
 #progressbar > div {
-    font-size: 20px;
+    line-height: 22px;
+    font-size: 15px;
     text-align: center;
     background-color: orange;
-     /* Adjust with JavaScript */
     height: 20px;
     border-radius: 10px;
 }
