@@ -64,10 +64,24 @@
 .classes h3{
 
 }
-.classes div{
+.classes .inside{
     border-top: 5px solid black;
     border-left: 5px solid black;
     padding: 10px;
+}
+#progressbar {
+    background-color: black;
+    border-radius: 13px; /* (height of inner div) / 2 + padding */
+    padding: 3px;
+}
+
+#progressbar > div {
+    font-size: 20px;
+    text-align: center;
+    background-color: orange;
+     /* Adjust with JavaScript */
+    height: 20px;
+    border-radius: 10px;
 }
 .classes p{
     font-size: 15px;

@@ -6,7 +6,7 @@
             <h3>{{ classe['name'] }}</h3>
 
             {% for activity in classe['activities'] %}
-                <div>
+                <div class="inside">
 
                     <p>
                         <img src='/styles/{{ activity['type'] | safe}}.svg' >{{ activity['name'] | safe}}
@@ -17,6 +17,10 @@
                     <p>
                         {{activity['deadline'] | safe}}
                     </p>
+
+                    <div id="progressbar">
+                        <div style="width: {{ activity['percent_time'][:5] }}%;">{{ activity['percent_time'][:5] }}%</div>
+                    </div>
 
                 </div>
             {% endfor %}

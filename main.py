@@ -59,7 +59,7 @@ class LoginPage(webapp2.RequestHandler):
                 self.redirect('/home')
 
             else:
-                self.get("Senha ou usuario invalidos.", username)
+                self.get("Senha ou usuário inválidos.", username)
                 pass
 
 class Home(webapp2.RequestHandler):

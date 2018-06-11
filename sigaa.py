@@ -1,4 +1,5 @@
 #coding: utf-8
+import deadline_module
 import urllib2, urllib
 from HTMLParser import HTMLParser
 
@@ -41,8 +42,7 @@ def get_class_html(cookie, id):
             if not(activity_html_i == 5):
                 activity_html_f = activity_html.find('</div>')
                 activity['deadline'] = unescape(activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')).encode('utf-8')
-                print activity['deadline']
-                get_deadline(activity['deadline'], 'forum')
+                activity['percent_time'] = get_deadline(activity['deadline'], 'forum')
             else:
                 activity['deadline'] = "Nao possui prazo de validade."
 
@@ -64,10 +64,7 @@ def get_class_html(cookie, id):
             activity_html_i = activity_html.find('">Inicia em') + 2
             activity_html_f = activity_html.find('</div>')
             activity['deadline'] = unescape(activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')).encode('utf-8')
-
-            print activity['deadline']
-            get_deadline(activity['deadline'], 'assignment')
-
+            activity['percent_time'] = get_deadline(activity['deadline'], 'assignment')
             activity['type'] = 'assignment'
 
             #acicionando a lista de atividades
@@ -134,49 +131,43 @@ def login(username, password):
 def get_deadline(deadline_str, type):
     """Returns a dict with the info about the deadline structured init and end"""
     #init and end return
-    deadlines = {}
-    #init or and
-    deadline = {}
+    deadlines = {
+        'init': {},
+        'end' : {},
+        }
 
     #for foruns
     if 'forum' in type:
         #For foruns deadine init
-        deadline['day']   = int(deadline_str[36:38])
-        deadline['month'] = int(deadline_str[39:41])
-        deadline['year']  = int(deadline_str[42:46])
-        deadline['hour']  = int(deadline_str[51:53])
-        deadline['min']   = int(deadline_str[54:56])
-
-        deadlines['init'] = deadline
+        deadlines['init']['day']   = int(deadline_str[36:38])
+        deadlines['init']['month'] = int(deadline_str[39:41])
+        deadlines['init']['year']  = int(deadline_str[42:46])
+        deadlines['init']['hour']  = int(deadline_str[51:53])
+        deadlines['init']['min']   = int(deadline_str[54:56])
 
         #For foruns deadline end
-        deadline['day']   = int(deadline_str[77:79])
-        deadline['month'] = int(deadline_str[80:82])
-        deadline['year']  = int(deadline_str[83:87])
-        deadline['hour']  = int(deadline_str[92:94])
-        deadline['min']   = int(deadline_str[95:97])
-
-        deadlines['end'] = deadline
+        deadlines['end']['day']   = int(deadline_str[77:79])
+        deadlines['end']['month'] = int(deadline_str[80:82])
+        deadlines['end']['year']  = int(deadline_str[83:87])
+        deadlines['end']['hour']  = int(deadline_str[92:94])
+        deadlines['end']['min']   = int(deadline_str[95:97])
 
     #For activities
     elif 'assignment' in type :
         #For activities deadline init
-        deadline['day']   = int(deadline_str[10:12])
-        deadline['month'] = int(deadline_str[13:15])
-        deadline['year']  = int(deadline_str[16:20])
-        deadline['hour']  = int(deadline_str[25:26])
-        deadline['min']   = int(deadline_str[28:29])
-
-
-        deadlines['init'] = deadline
+        deadlines['init']['day']   = int(deadline_str[10:12])
+        deadlines['init']['month'] = int(deadline_str[13:15])
+        deadlines['init']['year']  = int(deadline_str[16:20])
+        deadlines['init']['hour']  = int(deadline_str[25:26])
+        deadlines['init']['min']   = int(deadline_str[28:29])
 
         #For activities deadline end
-        deadline['day']   =  int(deadline_str[44:46])
-        deadline['month'] =  int(deadline_str[47:49])
-        deadline['year']  =  int(deadline_str[50:54])
-        deadline['hour']  =  int(deadline_str[59:61])
-        deadline['min']   =  int(deadline_str[63:65])
+        deadlines['end']['day']   =  int(deadline_str[44:46])
+        deadlines['end']['month'] =  int(deadline_str[47:49])
+        deadlines['end']['year']  =  int(deadline_str[50:54])
+        deadlines['end']['hour']  =  int(deadline_str[59:61])
+        deadlines['end']['min']   =  int(deadline_str[63:65])
 
-        deadlines['end'] = deadline
 
-    return deadlines
+
+    return str(deadline_module.calc_deadline_percent(deadlines))
