@@ -17,10 +17,12 @@
                     <p>
                         {{activity['deadline'] | safe}}
                     </p>
-
-                    <div id="progressbar">
-                        <div style="width: {{ activity['percent_time'][:5] }}%;">{{ activity['percent_time'][:5] }}%</div>
-                    </div>
+                    
+                    {% if not("Não possui prazo de validade." in activity['deadline']) %}
+                        <div id="progressbar">
+                            <div style="width: {{ activity['percent_time'][:5] }}%;">{{ activity['percent_time'][:5] }}%</div>
+                        </div>
+                    {% endif %}
 
                 </div>
             {% endfor %}

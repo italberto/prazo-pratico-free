@@ -44,7 +44,7 @@ def get_class_html(cookie, id):
                 activity['deadline'] = unescape(activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')).encode('utf-8')
                 activity['percent_time'] = get_deadline(activity['deadline'], 'forum')
             else:
-                activity['deadline'] = "Nao possui prazo de validade."
+                activity['deadline'] = "Não possui prazo de validade."
 
             activity['type'] =  'forum'
 
