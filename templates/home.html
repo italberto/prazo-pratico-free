@@ -1,0 +1,47 @@
+{% extends 'base_logged.html' %}
+{% block logged %}
+
+    {% for classe in classes %}
+
+        <div class="classes">
+            <h3>{{ classe['name'] | safe }}</h3>
+
+            {% for activity in classe['activities'] %}
+
+                {% if ("possui prazo de validade." in activity['deadline']) %}
+                    <div class="inside" style = "">
+
+                        <p>
+                            <img src='/styles/{{ activity['type'] | safe}}.svg' >{{ activity['name'] | safe}}
+                        </p>
+
+                        <br>
+
+                {% else %}
+                    <div class="inside" style = "{% if  activity['percent_time'] < 100 %} background-color:#FFE74C; {% endif %}">
+
+                        <p>
+                            <img src='/styles/{{ activity['type'] | safe}}.svg' >{{ activity['name'] | safe}}
+                        </p>
+
+
+                        <div id="progressbar">
+                            <div style="width: {{ activity['percent_time'] }}%; {% if activity['percent_time'] == 100 %} background-color:#AFFC41; {% endif %}">{{ activity['percent_time'] }}%</div>
+                        </div>
+
+                 {% endif %}
+
+                    <p>
+                        {{activity['deadline'] | safe}}
+                    </p>
+
+
+
+                </div>
+            {% endfor %}
+
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
