@@ -27,4 +27,6 @@ def calc_deadline_percent(deadlines):
 
     if percent > 100:
         return 100.0
+    elif percent < 0:
+        return 0.0
     return percent
