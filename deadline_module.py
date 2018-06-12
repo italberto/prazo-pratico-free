@@ -13,8 +13,8 @@ def calc_deadline_percent(deadlines):
 
         #and return a percentage time of the time left
     """
-    deadline_init = datetime.datetime(deadlines['init']['year'], deadlines['init']['month'], deadlines['init']['day'], deadlines['init']['hour'], deadlines['init']['min'])
-    deadline_end  = datetime.datetime(deadlines['end']['year'], deadlines['end']['month'], deadlines['end']['day'], deadlines['end']['hour'], deadlines['end']['min'])
+    deadline_init = datetime.datetime(int(deadlines['init']['year']), int(deadlines['init']['month']), int(deadlines['init']['day']), int(deadlines['init']['hour']), int(deadlines['init']['min']))
+    deadline_end  = datetime.datetime(int(deadlines['end']['year']), int(deadlines['end']['month']), int(deadlines['end']['day']), int(deadlines['end']['hour']), int(deadlines['end']['min']))
 
     hours_total = (deadline_end - deadline_init).days
 

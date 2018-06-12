@@ -1,6 +1,7 @@
 #coding: utf-8
 import deadline_module
 import urllib2, urllib
+import re
 from HTMLParser import HTMLParser
 
 def get_class_html(cookie, id):
@@ -136,38 +137,24 @@ def get_deadline(deadline_str, type):
         'end' : {},
         }
 
+    datetime_group = re.findall(r"[0-9]{2}\/[0-9]{2}\/[0-9]{4}|[0-9]{2}:[0-9]{2}|[0-9]h [0-9]|[0-9]{2}h [0-9]{2}", deadline_str)
+
     #for foruns
     if 'forum' in type:
-        #For foruns deadine init
-        deadlines['init']['day']   = int(deadline_str[36:38])
-        deadlines['init']['month'] = int(deadline_str[39:41])
-        deadlines['init']['year']  = int(deadline_str[42:46])
-        deadlines['init']['hour']  = int(deadline_str[51:53])
-        deadlines['init']['min']   = int(deadline_str[54:56])
-
+        #For foruns deadline init
+        deadlines['init']['day'], deadlines['init']['month'], deadlines['init']['year'] = datetime_group[0].split('/')
+        deadlines['init']['hour'], deadlines['init']['min'] = datetime_group[1].split(':')
         #For foruns deadline end
-        deadlines['end']['day']   = int(deadline_str[77:79])
-        deadlines['end']['month'] = int(deadline_str[80:82])
-        deadlines['end']['year']  = int(deadline_str[83:87])
-        deadlines['end']['hour']  = int(deadline_str[92:94])
-        deadlines['end']['min']   = int(deadline_str[95:97])
+        deadlines['end']['day'], deadlines['end']['month'], deadlines['end']['year']    = datetime_group[2].split('/')
+        deadlines['end']['hour'], deadlines['end']['min'] = datetime_group[3].split(':')
 
     #For activities
     elif 'assignment' in type :
-        #For activities deadline init
-        deadlines['init']['day']   = int(deadline_str[10:12])
-        deadlines['init']['month'] = int(deadline_str[13:15])
-        deadlines['init']['year']  = int(deadline_str[16:20])
-        deadlines['init']['hour']  = int(deadline_str[25:26])
-        deadlines['init']['min']   = int(deadline_str[28:29])
-
-        #For activities deadline end
-        deadlines['end']['day']   =  int(deadline_str[44:46])
-        deadlines['end']['month'] =  int(deadline_str[47:49])
-        deadlines['end']['year']  =  int(deadline_str[50:54])
-        deadlines['end']['hour']  =  int(deadline_str[59:61])
-        deadlines['end']['min']   =  int(deadline_str[63:65])
-
-
+        #For assignment deadline init
+        deadlines['init']['day'], deadlines['init']['month'], deadlines['init']['year'] = datetime_group[0].split('/')
+        deadlines['init']['hour'], deadlines['init']['min'] = datetime_group[1].split('h ')
+        #For assignment deadline end
+        deadlines['end']['day'], deadlines['end']['month'], deadlines['end']['year']    = datetime_group[2].split('/')
+        deadlines['end']['hour'], deadlines['end']['min'] = datetime_group[3].split('h ')
 
     return str(deadline_module.calc_deadline_percent(deadlines))
