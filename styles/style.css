@@ -40,7 +40,7 @@
 /*=============For login=========*/
 .wellcome-login {
     display: grid;
-    grid-template: 0.4fr 1fr / repeat(12, 1fr);
+    grid-template: 0.2fr 1fr / repeat(12, 1fr);
     padding: 10px;
     grid-column: 1 / -1;
     grid-row: 1 / -1;
@@ -145,8 +145,5 @@
     .index a{
         grid-column: 6 / 8;
     }
-    .wellcome-login {
-        grid-template: 0.2fr 1fr / repeat(12, 1fr);
-
-    }
+    
 }
