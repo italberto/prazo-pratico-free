@@ -40,7 +40,7 @@
 /*=============For login=========*/
 .wellcome-login {
     display: grid;
-    grid-template: 60px auto / repeat(12, 1fr);
+    grid-template: 0.4fr 1fr / repeat(12, 1fr);
     padding: 10px;
     grid-column: 1 / -1;
     grid-row: 1 / -1;
@@ -48,7 +48,7 @@
 }
 .wellcome-login p {
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     grid-column: 1/ -1;
     grid-row: 1 / 1;
     border-radius: 5px;
@@ -135,6 +135,7 @@
     .content{
         grid-column: 4 / 10;
     }
+
     .index button{
         grid-column: 6 / 8;
         font-size: 15px;
@@ -143,5 +144,9 @@
     }
     .index a{
         grid-column: 6 / 8;
+    }
+    .wellcome-login {
+        grid-template: 0.2fr 1fr / repeat(12, 1fr);
+
     }
 }

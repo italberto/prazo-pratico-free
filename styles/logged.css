@@ -65,10 +65,11 @@
 
 }
 .classes .inside{
-    background-color: #6CC551;
+
     border-top: 5px solid black;
     border-left: 5px solid black;
     padding: 10px;
+
 }
 #progressbar {
     background-color: black;
