@@ -6,6 +6,7 @@ It is a Web Aplication for acess deadlines to evaluative activities in SIGAA por
 - Python 2.7
 - Jinja2
 - Urllib2
+- Regex
 - Google App Engine
 - Html5
 - CSS
