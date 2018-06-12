@@ -43,7 +43,7 @@ def get_class_html(cookie, id):
             if not(activity_html_i == 5):
                 activity_html_f = activity_html.find('</div>')
                 activity['deadline'] = unescape(activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')).encode('utf-8')
-                activity['percent_time'] = get_deadline(activity['deadline'], 'forum')
+                activity['percent_time'] = int(get_deadline(activity['deadline'], 'forum'))
             else:
                 activity['deadline'] = "Não possui prazo de validade."
 
@@ -65,7 +65,7 @@ def get_class_html(cookie, id):
             activity_html_i = activity_html.find('">Inicia em') + 2
             activity_html_f = activity_html.find('</div>')
             activity['deadline'] = unescape(activity_html[activity_html_i:activity_html_f].replace('\\r', ' ').replace('\\t', '').replace('\\n', ' ').replace('</span>', '')).encode('utf-8')
-            activity['percent_time'] = get_deadline(activity['deadline'], 'assignment')
+            activity['percent_time'] = int(get_deadline(activity['deadline'], 'assignment'))
             activity['type'] = 'assignment'
 
             #acicionando a lista de atividades

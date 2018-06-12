@@ -71,6 +71,8 @@ class Home(webapp2.RequestHandler):
         if username:
             user_consult = db.GqlQuery("SELECT * FROM User WHERE username = \'" + username + "\'").get()
             user = json.loads(user_consult.json_data)
+
+            print user
             t = jinja_env.get_template('home.html')
             self.response.out.write(t.render(username=user['username'], classes= user['classes']))
         else:

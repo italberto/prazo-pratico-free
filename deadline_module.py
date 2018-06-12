@@ -26,7 +26,7 @@ def calc_deadline_percent(deadlines):
     percent = 100.0 - ((hours_restant * 100.0) / hours_total)
 
     if percent > 100:
-        return 100.0
+        return 100
     elif percent < 0:
-        return 0.0
-    return percent
+        return 0
+    return int(percent)

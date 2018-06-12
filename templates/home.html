@@ -7,23 +7,25 @@
             <h3>{{ classe['name'] | safe }}</h3>
 
             {% for activity in classe['activities'] %}
-                <div class="inside">
+
+
+                <div class="inside" style = "{% if activity['percent_time'] < 100 %} background-color:#FFE74C; {% endif %}">
 
                     <p>
                         <img src='/styles/{{ activity['type'] | safe}}.svg' >{{ activity['name'] | safe}}
                     </p>
 
-                    <br>
+                    {% if not("possui prazo de validade." in activity['deadline']) %}
+                        <div id="progressbar">
+                            <div style="width: {{ activity['percent_time'] }}%; {% if activity['percent_time'] == 100 %} background-color:#AFFC41; {% endif %}">{{ activity['percent_time'] }}%</div>
+                        </div>
+                    {% endif %}
 
                     <p>
                         {{activity['deadline'] | safe}}
                     </p>
 
-                    {% if not("possui prazo de validade." in activity['deadline']) %}
-                        <div id="progressbar">
-                            <div style="width: {{ activity['percent_time'][:5] }}%;">{{ activity['percent_time'][:5] }}%</div>
-                        </div>
-                    {% endif %}
+
 
                 </div>
             {% endfor %}
