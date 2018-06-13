@@ -85,9 +85,14 @@ class LogOut(webapp2.RequestHandler):
         self.response.out.write('')
         self.redirect('/')
 
+class Donations(webapp2.RequestHandler):
+    def get(self):
+        t = jinja_env.get_template('donations.html')
+        self.response.out.write(t.render())
 
 
 
 
 
-app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/home', Home), ('/logout', LogOut)])
+
+app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/home', Home), ('/logout', LogOut), ('/donations', Donations)])
