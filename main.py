@@ -35,10 +35,15 @@ class LoginPage(webapp2.RequestHandler):
         username = self.request.get("username")
         password = self.request.get("password")
 
+        login = ''
+
         #if the data is full correctly
         if username and password:
             #make login
-            login = sigaa.login(username, password)
+            try:
+                login = sigaa.login(username, password)
+            except:
+                self.redirect('/error')
             #if user or password is wrong
             if login:
                 login_json = json.dumps(login)
@@ -51,7 +56,9 @@ class LoginPage(webapp2.RequestHandler):
                     user_verify.json_data = login_json
                     user_verify.put()
                 else:
+
                     user = User(username=username, json_data=login_json)
+
                     user.put()
 
                 self.response.headers['Set-Cookie'] = 'user=' + username.encode("utf-8")
@@ -90,9 +97,11 @@ class Donations(webapp2.RequestHandler):
         t = jinja_env.get_template('donations.html')
         self.response.out.write(t.render())
 
+class ErrorPage(webapp2.RequestHandler):
+    def get(self):
+        t = jinja_env.get_template('error.html')
+        self.response.out.write(t.render())
 
 
 
-
-
-app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/home', Home), ('/logout', LogOut), ('/donations', Donations)])
+app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/home', Home), ('/logout', LogOut), ('/donations', Donations), ('/error', ErrorPage)])
