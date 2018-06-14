@@ -13,20 +13,32 @@ def calc_deadline_percent(deadlines):
 
         #and return a percentage time of the time left
     """
+
+    time_left = {}
+
     deadline_init = datetime.datetime(int(deadlines['init']['year']), int(deadlines['init']['month']), int(deadlines['init']['day']), int(deadlines['init']['hour']), int(deadlines['init']['min']))
     deadline_end  = datetime.datetime(int(deadlines['end']['year']), int(deadlines['end']['month']), int(deadlines['end']['day']), int(deadlines['end']['hour']), int(deadlines['end']['min']))
 
-    hours_total = (deadline_end - deadline_init).days
+    days_total = (deadline_end - deadline_init).days
 
     time_actual = datetime.datetime.now() - datetime.timedelta(hours=3)
 
-    hours_restant = (deadline_end - time_actual).days
+    days_restant = (deadline_end - time_actual).days
 
-
-    percent = 100.0 - ((hours_restant * 100.0) / hours_total)
+    percent = 100.0 - ((days_restant * 100.0) / days_total)
 
     if percent > 100:
-        return 100
-    elif percent < 0:
-        return 0
-    return int(percent)
+        time_left['percent_time'] = 100
+    elif percent <= 0:
+        time_left['percent_time'] =  0
+    else:
+        time_left['percent_time'] =  int(percent)
+
+    if days_restant < 0:
+        time_left['days_left'] = 0
+    if days_restant >= 0:
+        time_left['days_left'] = days_restant
+
+    print time_left
+
+    return time_left

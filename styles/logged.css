@@ -71,6 +71,11 @@
 
 }
 
+.classes .days{
+    text-align: center;
+    font-size: 15px;
+}
+
 #progressbar {
     background-color: black;
     border-radius: 13px; /* (height of inner div) / 2 + padding */

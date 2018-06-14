@@ -4,6 +4,7 @@ import webapp2
 import jinja2
 import json
 import base64
+import httplib # for exception HTTPException
 #funcoes de login
 import sigaa
 
@@ -42,7 +43,8 @@ class LoginPage(webapp2.RequestHandler):
             #make login
             try:
                 login = sigaa.login(username, password)
-            except:
+            except httplib.HTTPException:
+                print 'SIGAA não respondeu em tempo, timeout;'
                 self.redirect('/error')
             #if user or password is wrong
             if login:

@@ -12,22 +12,22 @@
                     <div class="inside" style = "">
 
                         <p class="name-activity">
-                            <img src='/styles/{{ activity['type'] | safe}}.svg' >{{ activity['name'] | safe}}
+                            <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
                         </p>
 
                         <br>
 
                 {% else %}
-                    <div class="inside" style = "{% if  activity['percent_time'] < 100 %} background-color:#FFE74C; {% endif %}">
+                    <div class="inside" style = "{% if  activity['time_left']['percent_time'] < 100 %} background-color:#FFE74C; {% endif %}">
 
                         <p class="name-activity">
-                            <img src='/styles/{{ activity['type'] | safe}}.svg' >{{ activity['name'] | safe}}
+                            <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
                         </p>
 
                         <br>
-
+                        <p class="days"><b>Tempo restante: {{ activity['time_left']['days_left'] }} dia(s).</b></p>
                         <div id="progressbar">
-                            <div style="width: {{ activity['percent_time'] }}%; {% if activity['percent_time'] == 100 %} background-color:#AFFC41; {% endif %}">{{ activity['percent_time'] }}%</div>
+                            <div style="width: {{ activity['time_left']['percent_time'] }}%; {% if activity['time_left']['percent_time'] == 100 %} background-color:#AFFC41; {% endif %}">{{ activity['time_left']['percent_time'] }}%</div>
                         </div>
 
                  {% endif %}
