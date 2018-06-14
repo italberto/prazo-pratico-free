@@ -62,7 +62,6 @@
     grid-column: 2 / 20;
 }
 .classes h3{
-
 }
 .classes .inside{
 
@@ -71,6 +70,7 @@
     padding: 10px;
 
 }
+
 #progressbar {
     background-color: black;
     border-radius: 13px; /* (height of inner div) / 2 + padding */
@@ -85,7 +85,12 @@
     height: 20px;
     border-radius: 10px;
 }
-.classes p{
+
+.classes .name-activity{
+    font-size: 16px;
+}
+
+.classes .deadline-activity{
     font-size: 15px;
 }
 .classes img {
@@ -122,8 +127,11 @@
     .classes h3{
         font-size: 23px;
     }
-    .classes p{
-        font-size: 20px;
+    .classes .name-activity{
+        font-size: 19px;
+    }
+    .classes .deadline-activity{
+        font-size:17px;
     }
     .classes img {
         width: auto;
