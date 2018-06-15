@@ -73,13 +73,14 @@
 
 .classes .days{
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 #progressbar {
     background-color: black;
     border-radius: 13px; /* (height of inner div) / 2 + padding */
     padding: 3px;
+    margin-bottom: 10px;
 }
 
 #progressbar > div {
@@ -92,11 +93,12 @@
 }
 
 .classes .name-activity{
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .classes .deadline-activity{
-    font-size: 15px;
+    font-size: 12px;
 }
 .classes img {
     width: 20px;
@@ -121,6 +123,12 @@
 }
 
 @media (min-width:768px) {
+
+    .header h1 {
+        font-size: 45px;
+        line-height: 80px;
+    }
+
     .content{
         display: grid;
         grid-template: none/ repeat(20, 1fr);
@@ -130,17 +138,21 @@
     }
 
     .classes h3{
-        font-size: 23px;
+        font-size: 30px;
     }
     .classes .name-activity{
-        font-size: 19px;
+        font-size: 18px;
+        margin-bottom: 0;
     }
     .classes .deadline-activity{
-        font-size:17px;
+        font-size:16px;
     }
     .classes img {
         width: auto;
         height: 25px;
+    }
+    .classes .days{
+        font-size: 15px;
     }
 
 }
