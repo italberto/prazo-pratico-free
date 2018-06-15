@@ -37,7 +37,10 @@ def calc_deadline_percent(deadlines):
     if days_restant < 0:
         time_left['days_left'] = 0
     if days_restant >= 0:
-        time_left['days_left'] = round(days_restant, 2)
+        if days_restant >= 1:
+            time_left['days_left'] = int(days_restant)
+        if days_restant < 1:
+            time_left['days_left'] = round(days_restant, 2)
 
     print time_left
 
