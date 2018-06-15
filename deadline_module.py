@@ -19,11 +19,11 @@ def calc_deadline_percent(deadlines):
     deadline_init = datetime.datetime(int(deadlines['init']['year']), int(deadlines['init']['month']), int(deadlines['init']['day']), int(deadlines['init']['hour']), int(deadlines['init']['min']))
     deadline_end  = datetime.datetime(int(deadlines['end']['year']), int(deadlines['end']['month']), int(deadlines['end']['day']), int(deadlines['end']['hour']), int(deadlines['end']['min']))
 
-    days_total = (deadline_end - deadline_init).days
+    days_total = ((deadline_end - deadline_init).total_seconds()/3600)/24
 
     time_actual = datetime.datetime.now() - datetime.timedelta(hours=3)
 
-    days_restant = (deadline_end - time_actual).days
+    days_restant = ((deadline_end - time_actual).total_seconds()/3600)/24
 
     percent = 100.0 - ((days_restant * 100.0) / days_total)
 
@@ -37,7 +37,7 @@ def calc_deadline_percent(deadlines):
     if days_restant < 0:
         time_left['days_left'] = 0
     if days_restant >= 0:
-        time_left['days_left'] = days_restant
+        time_left['days_left'] = round(days_restant, 2)
 
     print time_left
 

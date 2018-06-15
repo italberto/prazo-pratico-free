@@ -21,16 +21,18 @@ class User(db.Model):
 class MainPage(webapp2.RequestHandler):
     """index page"""
     def get(self):
+        count_users = db.GqlQuery("SELECT * FROM User").count()
         t = jinja_env.get_template('index.html')
-        self.response.out.write(t.render())
+        self.response.out.write(t.render(count_users=count_users))
 
 
 
 class LoginPage(webapp2.RequestHandler):
     """Login page"""
     def get(self, error="", user=""):
+        count_users = db.GqlQuery("SELECT * FROM User").count()
         t = jinja_env.get_template('login.html')
-        self.response.out.write(t.render(error=error, username=user))
+        self.response.out.write(t.render(error=error, username=user, count_users=count_users))
 
     def post(self):
         username = self.request.get("username")
