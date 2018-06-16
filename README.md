@@ -1,4 +1,4 @@
-# sigaa-ufpi-reminder
+# prazo-pratico - (free version)
 It is a Web Aplication for acess deadlines to evaluative activities in SIGAA portal at UFPI, via a responsive layout.
 
 ### Used technologies
