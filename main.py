@@ -98,8 +98,9 @@ class LogOut(webapp2.RequestHandler):
 
 class Donations(webapp2.RequestHandler):
     def get(self):
+        count_users = db.GqlQuery("SELECT * FROM User").count()
         t = jinja_env.get_template('donations.html')
-        self.response.out.write(t.render())
+        self.response.out.write(t.render(count_users=count_users))
 
 class ErrorPage(webapp2.RequestHandler):
     def get(self):
