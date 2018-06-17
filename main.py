@@ -67,13 +67,13 @@ class LoginPage(webapp2.RequestHandler):
 
                 self.response.headers['Set-Cookie'] = 'user=' + username.encode("utf-8")
                 self.response.out.write('Logando...')
-                self.redirect('/home')
+                self.redirect('/logged')
 
             else:
                 self.get("Senha ou usuário inválidos.", username)
                 pass
 
-class Home(webapp2.RequestHandler):
+class Logged(webapp2.RequestHandler):
     def get(self):
         username = self.request.cookies.get('user')
         #cookie_value = base64.b64decode(cookie_value)
@@ -84,8 +84,9 @@ class Home(webapp2.RequestHandler):
             user = json.loads(user_consult.json_data)
 
             print user
-            t = jinja_env.get_template('home.html')
-            self.response.out.write(t.render(username=user['username'], classes= user['classes']))
+            t = jinja_env.get_template('logged.html')
+            count_users = db.GqlQuery("SELECT * FROM User").count()
+            self.response.out.write(t.render(username=user['username'], classes=user['classes'], count_users=count_users))
         else:
             self.redirect('/login')
 
@@ -109,4 +110,4 @@ class ErrorPage(webapp2.RequestHandler):
 
 
 
-app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/home', Home), ('/logout', LogOut), ('/donations', Donations), ('/error', ErrorPage)])
+app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/logged', Logged), ('/logout', LogOut), ('/donations', Donations), ('/error', ErrorPage)])

@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block header %}
+    <header class="header">
+        <a href="/"><h1> Prazo Prático </h1></a>
+    </header>
+{% endblock %}
 
+{% block content %}
     <div class="donations">
 
         <h2>Mostre que você apoia o projeto.</h2>
@@ -20,5 +25,4 @@
         <p class="bitcoin" ><!--<b>₿</b> 1ATAsNSaqZHJQGAnv152bPhheAajFnTdnC*--></p>
 
     </div>
-
 {% endblock %}

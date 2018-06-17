@@ -1,4 +1,5 @@
-* {
+/*CSS pai de todas as páginas*/
+* { /*Para fazer a página pegar a tela inteira*/
     padding: 0;
     margin: 0;
     font-family: sans-serif;
@@ -8,7 +9,7 @@
 .container {
     min-height: 100vh;
     display: grid;
-    grid-template: 0.1fr auto 0.2fr / repeat(12, 1fr);
+    grid-template: 0.1fr auto 0.1fr / repeat(12, 1fr);
 
 }
 
@@ -35,8 +36,7 @@
     grid-column: 1 / -1;
 }
 
-/*============DONATIONS==================*/
-
+/*============DONATIONS [Page]==================*/
 .donations {
     padding:20px;
     display: grid;
@@ -61,11 +61,9 @@
     text-align: center;
     font-size: 10px;
 }
+/*------------------------------------------------*/
 
-/*---------------------------------------*/
-
-
-/*=============For login=========*/
+/*=============LOGIN [Page]=========*/
 .wellcome-login {
     display: grid;
     grid-template: 0.1fr 1fr / repeat(12, 1fr);
@@ -104,16 +102,16 @@
 .login-form span{
     color:red;
 }
-/*========================*/
+/*--------------------------------------------------------/
 
-/*=========INDEX.HTML=============*/
+/*==========================INDEX.HTML===================*/
 
 .index {
     grid-gap: 10px;
     padding: 10px;
     grid-column: 1 / -1;
     display: grid;
-    grid-template: 0.1fr 0.2fr 0.1fr 0.2fr 0.1fr / repeat(12, 1fr);
+    grid-template: 0.1fr 0.1fr 0.1fr 0.1fr 0.05fr / repeat(12, 1fr);
 }
 
 .index h2 {
@@ -126,22 +124,115 @@
     grid-column: 1 / -1;
 }
 
-.index a{
+.index .enter_button{
     grid-column: 4 / 10;
 }
 
 .index button{
-    /*grid-column: 3/11;*/
-    font-size: 15px;
+    padding: 5px;
+    font-size: 17px;
     width: 100%;
     height: 100%;
 }
 
 
-/*================================*/
+/*------------------------------------------------------*/
+
+/*====================LOGGED [Page]========================*/
+
+.header div{
+    display: grid;
+    grid-template: 1fr 0.1fr / 1fr;
+}
+
+.header div h1 {
+    text-align: center;
+    grid-column: 1 / 1;
+    line-height: 80px;
+    grid-row: 1 / 1;
+}
+
+.header div ul {
+    display: grid;
+    grid-template: auto / 1fr 1fr;
+    text-align: center;
+    grid-row: 2 / 2;
+    background-color: #FC5130;
+}
+
+.header div ul a{
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+}
+.header div ul li{
+    padding: 5px;
+    display: inline-block;
+}
+
+.header div ul a:hover{
+    background-color: #1B998B;
+    color: black;
+}
+
+.logged {
+    display: grid;
+    grid-template: none/ repeat(20, 1fr);
+    grid-row: 2 / 2;
+    grid-column: 1 / -1;
+}
+
+.logged .classes{
+    padding: 10px;
+    grid-column: 2 / 20;
+}
+
+.logged .classes .inside{
+
+    border-top: 5px solid black;
+    border-left: 5px solid black;
+    padding: 10px;
+
+}
+
+.logged .classes .days{
+    text-align: center;
+    font-size: 13px;
+}
+
+.logged #progressbar {
+    background-color: black;
+    border-radius: 13px; /* (height of inner div) / 2 + padding */
+    padding: 3px;
+    margin-bottom: 10px;
+}
+
+.logged #progressbar > div {
+    line-height: 22px;
+    font-size: 15px;
+    text-align: center;
+    background-color: orange;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.logged .classes .name-activity{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.logged .classes .deadline-activity{
+    font-size: 13px;
+}
+
+.logged .classes img {
+    width: 20px;
+    height: auto;
+}
 
 
 
+/*-------------------------------------------------------*/
 
 .footer {
     display: grid;
@@ -166,9 +257,14 @@
 
 @media (min-width:768px) {
     .content{
-        grid-column: 4 / 10;
+        grid-column: 2 / 12;
     }
 
+/*=======================INDEX.HTML======================*/
+    .index {
+        grid-column: 4/10;
+
+    }
     .index button{
         grid-column: 6 / 8;
         font-size: 15px;
@@ -178,5 +274,45 @@
     .index a{
         grid-column: 6 / 8;
     }
+/*-------------------------------------------------------*/
+
+/*====================LOGGED [Page]===================*/
+    .header div h1 {
+        font-size: 45px;
+        line-height: 80px;
+    }
+
+    .logged{
+        display: grid;
+        grid-template: none/ repeat(20, 1fr);
+        grid-row: 2 / 2;
+        grid-column: 1 / -1;
+        margin-top: 20px;
+    }
+    .logged .classes h3{
+        font-size: 30px;
+    }
+    .logged .classes .name-activity{
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+    .logged .classes .deadline-activity{
+        font-size:16px;
+    }
+    .logged .classes img {
+        width: auto;
+        height: 25px;
+    }
+    .logged .classes .days{
+        font-size: 15px;
+    }
+/*-----------------------------------------------------*/
+
+/*=====================LOGIN [Page]====================*/
+    .wellcome-login {
+        grid-column: 4/10;
+    }
+
+/*-----------------------------------------------------*/
 
 }
