@@ -125,6 +125,7 @@
 }
 
 .index .enter_button{
+    margin-top: 27px;
     grid-column: 4 / 10;
 }
 

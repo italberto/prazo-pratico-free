@@ -6,7 +6,7 @@ import json
 import base64
 import httplib # for exception HTTPException
 #funcoes de login
-import sigaa
+import sigaa_ufpi
 
 from google.appengine.ext import db
 
@@ -18,10 +18,10 @@ class User(db.Model):
     username = db.StringProperty(required=True)
     json_data = db.TextProperty(required=True)
 
-class MainPage(webapp2.RequestHandler):
-    """index page"""
+class HomePage(webapp2.RequestHandler):
+    """Home page"""
     def get(self):
-        t = jinja_env.get_template('index.html')
+        t = jinja_env.get_template('home.html')
         title = "Prazo Prático".decode("utf-8")
         self.response.out.write(t.render(title=title))
 
@@ -44,7 +44,7 @@ class LoginPage(webapp2.RequestHandler):
         if username and password:
             #make login
             try:
-                login = sigaa.login(username, password)
+                login = sigaa_ufpi.login(username, password)
             except httplib.HTTPException:
                 print 'SIGAA não respondeu em tempo, timeout;'
                 self.redirect('/error')
@@ -110,4 +110,4 @@ class ErrorPage(webapp2.RequestHandler):
 
 
 
-app = webapp2.WSGIApplication([('/', MainPage), ('/login', LoginPage), ('/logged', Logged), ('/logout', LogOut), ('/donations', Donations), ('/error', ErrorPage)])
+app = webapp2.WSGIApplication([('/', HomePage), ('/login', LoginPage), ('/logged', Logged), ('/logout', LogOut), ('/donations', Donations), ('/error', ErrorPage)])
