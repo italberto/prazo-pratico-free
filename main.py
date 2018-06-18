@@ -21,20 +21,18 @@ class User(db.Model):
 class MainPage(webapp2.RequestHandler):
     """index page"""
     def get(self):
-        count_users = db.GqlQuery("SELECT * FROM User").count()
         t = jinja_env.get_template('index.html')
         title = "Prazo Prático".decode("utf-8")
-        self.response.out.write(t.render(count_users=count_users, title=title))
+        self.response.out.write(t.render(title=title))
 
 
 
 class LoginPage(webapp2.RequestHandler):
     """Login page"""
     def get(self, error="", user=""):
-        count_users = db.GqlQuery("SELECT * FROM User").count()
         t = jinja_env.get_template('login.html')
         title = "Prazo Prático - Entrar".decode("utf-8")
-        self.response.out.write(t.render(error=error, username=user, count_users=count_users, title=title))
+        self.response.out.write(t.render(error=error, username=user, title=title))
 
     def post(self):
         username = self.request.get("username")
@@ -87,9 +85,8 @@ class Logged(webapp2.RequestHandler):
 
             print user
             t = jinja_env.get_template('logged.html')
-            count_users = db.GqlQuery("SELECT * FROM User").count()
             title = "Prazo Prático - ".decode("utf-8") + user['username'].decode("utf-8")
-            self.response.out.write(t.render(username=user['username'], classes=user['classes'], count_users=count_users, title=title))
+            self.response.out.write(t.render(username=user['username'], classes=user['classes'], title=title))
         else:
             self.redirect('/login')
 
@@ -102,10 +99,9 @@ class LogOut(webapp2.RequestHandler):
 
 class Donations(webapp2.RequestHandler):
     def get(self):
-        count_users = db.GqlQuery("SELECT * FROM User").count()
         t = jinja_env.get_template('donations.html')
         title = "Prazo Prático - Apoie".decode("utf-8")
-        self.response.out.write(t.render(count_users=count_users, title=title))
+        self.response.out.write(t.render(title=title))
 
 class ErrorPage(webapp2.RequestHandler):
     def get(self):
