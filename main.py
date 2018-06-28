@@ -2,6 +2,7 @@
 import os
 import webapp2
 import jinja2
+import logging
 import json
 import base64
 import httplib # for exception HTTPException
@@ -45,8 +46,9 @@ class LoginPage(webapp2.RequestHandler):
             #make login
             try:
                 login = sigaa_ufpi.login(username, password)
-            except httplib.HTTPException:
+            except:
                 print 'SIGAA não respondeu em tempo, timeout;'
+                logging.exception('deu erro aqui')
                 self.redirect('/error')
             #if user or password is wrong
             if login:
@@ -95,7 +97,7 @@ class LogOut(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Set-Cookie'] = ''
         self.response.out.write('')
-        self.redirect('/')
+        self.redirect('/login')
 
 class Donations(webapp2.RequestHandler):
     def get(self):
