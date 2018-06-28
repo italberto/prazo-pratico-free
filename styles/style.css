@@ -13,3 +13,62 @@ footer {
     background-color: #343A40;
     color: white;
 }
+
+
+
+
+
+logged {
+    display: grid;
+    grid-template: none/ repeat(20, 1fr);
+    grid-column: 1 / -1;
+}
+
+.logged .classes{
+    padding: 10px;
+    grid-column: 2 / 20;
+}
+
+.logged .classes .inside{
+
+    border-top: 5px solid black;
+    border-left: 5px solid black;
+    padding: 10px;
+
+}
+
+.logged .classes .days{
+    text-align: center;
+    font-size: 13px;
+}
+
+.logged #progressbar {
+    background-color: black;
+    border-radius: 13px; /* (height of inner div) / 2 + padding */
+    padding: 3px;
+    margin-bottom: 10px;
+}
+
+.logged #progressbar > div {
+    line-height: 22px;
+    font-size: 15px;
+    text-align: center;
+    background-color: orange;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.logged .classes .name-activity{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.logged .classes .deadline-activity{
+    font-size: 13px;
+}
+
+.logged .classes img {
+    width: 20px;
+    height: auto;
+}
+
