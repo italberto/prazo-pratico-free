@@ -1,22 +1,33 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <header class="header">
-        <a href="/"><h1> Prazo Prático </h1></a>
-    </header>
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand" href="/">Prazo Prático</a> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home</a>
+                <a class="nav-item nav-link active" href="/login">Entrar</a>
+                <a class="nav-item nav-link active" href="/donations">Apoiar o Projeto</a>
+            </div>
+        </div>
+    </nav>
 {% endblock %}
 
 {% block content %}
-    <div class="index">
-        <h2>O que é o Prazo Prático?</h2>
-        <p>É um cliente alternativo (não oficial) ao SIGAA da Universidade Federal do Piauí,
-        desenvolvido por alunos, com o objetivo de oferecer acesso facilitado aos
-        prazos de atividades e foruns.</p>
-        <h2>Como usar?</h2>
-        <p>Entre com o seu usuário e senha do SIGAA, e tenha acesso a seus prazos.
-        Não armazenamos informações de nossos usuários!
-        O código fonte desta aplicação está disponivel <a href="https://github.com/macielti/prazo-pratico" target="_blank">aqui.</a>
-        </p>
-        <a class="enter_button" href="/login"><button>Entrar</button></a>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1 class="display-5">O que é o Prazo Prático?</h1>
+                <p class="lead">É um cliente alternativo (não oficial) ao SIGAA da Universidade Federal do Piauí, desenvolvido por alunos, com o objetivo de oferecer acesso facilitado aos prazos de atividades e foruns.</p>
+                <h1 class="display-5">Como usar?</h1>
+                <p class="lead">Entre com o seu usuário e senha do SIGAA, e tenha acesso a seus prazos. Não armazenamos as senhas de nossos usuários! O código fonte desta aplicação está disponivel <a href="https://github.com/macielti/prazo-pratico-free">aqui</a>.</p>
+                <hr class="my-4">
+                <p>Clique no botão abaixo para entrar no sistema.</p>
+                <a class="btn btn-primary btn-lg" href="/login" role="button">Entrar</a>
+            </div>
+        </div>
     </div>
 {% endblock%}

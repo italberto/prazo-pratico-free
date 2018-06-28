@@ -1,28 +1,40 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <header class="header">
-        <a href="/"><h1> Prazo Prático </h1></a>
-    </header>
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand " href="/">Prazo Prático</a> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home</a>
+                <a class="nav-item nav-link active" href="/login">Entrar</a>
+                <a class="nav-item nav-link active" href="/donations">Apoiar o Projeto</a>
+            </div>
+        </div>
+    </nav>
 {% endblock %}
 
 {% block content %}
-    <div class="donations">
-
-        <h2>Mostre que você apoia o projeto.</h2>
-        <p>Precisamos de sua ajuda para manter o site funcionando. Ele está
-        hospedado em um servidor profissional e isso tem um custo. Se gostou
-        do projeto, mostre isso doando qualquer valor em dinheiro através das
-        opções abaixo, assim você ajuda a manter este projeto funcionando.</p>
-
-        <form method='post' action='https://www.moip.com.br/Process.do'>
-            <input type='hidden' name='method' value='donation'/>
-            <input type='hidden' name='donation_id' value='11169'/>
-            <input type='hidden' name='type' value='2'/>
-            <input type='image' name='submit' src='https://static.moip.com.br/imgs/buttons/bt_doar_c01_e04.png' alt='Prazo Pr&amp;amp;aacute;tico' border='0' />
-        </form>
-
-        <p class="bitcoin" ><!--<b>₿</b> 1ATAsNSaqZHJQGAnv152bPhheAajFnTdnC*--></p>
-
+    <div class="container">
+        <div class="row">
+            <img id="image-donation" src="styles/we-need-you-300x230.png" class="rounded mx-auto d-block" alt="...">
+            <div class="jumbotron">
+                <h1 class="display-5">Mostre que você apoia o projeto.</h1>
+                <p class="lead">Precisamos de sua ajuda para manter o site funcionando. Ele está
+                                hospedado em um servidor profissional e isso tem um custo. Se gostou
+                                do projeto, mostre isso doando qualquer valor em dinheiro através das
+                                opções abaixo, assim você ajuda a manter este projeto funcionando.</p>
+                <hr class="my-4">
+                <p>Clique no botão abaixo para fazer uma doação.</p>
+                <form method='post' action='https://www.moip.com.br/Process.do'>
+                    <input type='hidden' name='method' value='donation'/>
+                    <input type='hidden' name='donation_id' value='11169'/>
+                    <input type='hidden' name='type' value='2'/>
+                    <input type='image' name='submit' src='https://static.moip.com.br/imgs/buttons/bt_doar_c01_e04.png' alt='Prazo Pr&amp;amp;aacute;tico' border='0' />
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

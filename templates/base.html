@@ -2,24 +2,85 @@
 <html lang="pt" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" href="styles/favicon.png"><!--Flaticons-->
+        <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        
         <link rel="stylesheet" href="/styles/style.css">
         <title>{{ title }}</title>
     </head>
-    <body class="container">
-
-        <!--header tag-->
-        {% block header %}
-        {% endblock %}
-
-        <main class="content">
-            {% block content %}
+    <body>
+        <div class="max-width">
+            <!--nav tag-->
+            {% block nav %}
             {% endblock %}
-        </main>
-        <footer class="footer">
-            <a href="https://github.com/macielti" target="_blank">Desenvolvido com muito ❤️ e ☕ por Bruno do N. Maciel em Gilbués-PI, Brasil.</a>
-            <a href="/donations">Clique aqui e mostre que você apoia o projeto.</a>
-        </footer>
+
+            <main class="content">
+                {% block content %}
+                {% endblock %}
+            </main>
+            
+            <!-- Footer -->
+            <footer class="page-footer font-small blue pt-4 mt-4">
+
+                <!-- Footer Links -->
+                <div class="container-fluid text-center text-md-left">
+
+                  <!-- Grid row -->
+                  <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 mt-md-0 mt-3">
+
+                      <!-- Content -->
+                      <h5 class="text-uppercase"> </h5>
+                      <p>Desenvolvido com ❤️ por Bruno do Nascimento Maciel, em Gilbués-PI.</p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none pb-3">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 mb-md-0 mb-3">
+
+                      <!-- Links -->
+                      <h5 class="text-uppercase">Contatos</h5>
+
+                      <ul class="list-unstyled">
+                        <li>
+                          <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                          <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                          <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                          <a href="#!">Link 4</a>
+                        </li>
+                      </ul>
+
+                    </div>
+                    <!-- Grid column -->
+
+                  </div>
+                  <!-- Grid row -->
+
+                </div>
+                <!-- Footer Links -->
+
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                  <a href="#"> Gilbas Soft </a>
+                </div>
+                <!-- Copyright -->
+
+              </footer>
+              <!-- Footer -->
     </body>
 </html>

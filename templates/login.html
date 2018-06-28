@@ -1,29 +1,50 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <header class="header">
-        <a href="/"><h1> Prazo Prático </h1></a>
-    </header>
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand " href="/">Prazo Prático</a> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home</a>
+                <a class="nav-item nav-link active" href="/login">Entrar</a>
+                <a class="nav-item nav-link active" href="/donations">Apoiar o Projeto</a>
+            </div>
+        </div>
+    </nav>
 {% endblock %}
 
 {% block content %}
-    <div class="wellcome-login">
-        <p>Faça login com o seu usuário e senha do SIGAA-UFPI e tenha acesso facilitado a todos os seus prazos.</p>
 
-        <form class="login-form" method="post">
+    <div class="container">
+          
+            <div class="alert alert-info" role="alert">
+                Faça login com o seu usuário e senha do SIGAA-UFPI e tenha acesso facilitado a todos os seus prazos.
+            </div>
 
-            <label for="username">
-                Usuário<br>
-                <input id="usename" type="text" name="username" required value="{{ username }}">
-            </label>
+            <div class="jumbotron ">
+                <form method="post">
+                  <div class="form-group">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" class="form-control" id="usuario" aria-describedby="username-help" placeholder="Digite o seu nome de usuário" name="username" required value="{{ username }}">
+                    <small id="username-help" class="form-text text-muted">Nós não guardamos os seus dados login.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Senha</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="password" required value="">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Entrar</button>
+                </form>
+            </div>
+            
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+              {{ error.decode('utf-8') }}
+            </div>
+            {% endif %}
 
-            <label for="password">
-                <br>Senha<br>
-                <input id="password" type="password" name="password" required value="">
-            </label>
-            <button type="submit" > Entrar </button>
-
-            <span>{{ error.decode('utf-8') }}</span>
-        </form>
     </div>
+
 {% endblock %}
