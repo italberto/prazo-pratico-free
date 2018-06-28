@@ -10,8 +10,8 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/">Home</a>
-                <a class="nav-item nav-link active" href="/donations">Apoiar o Projeto</a>
-                <a class="nav-item nav-link active" href="/login">Sair</a>
+                <a class="nav-item nav-link active" href="/donations" target="_blank">Apoiar o Projeto</a>
+                <a class="nav-item nav-link active" href="/logout">Sair</a>
             </div>
         </div>
     </nav>
@@ -21,7 +21,7 @@
 
 {% block content %}
 
-    <div class="logged">
+    <div class="logged col-12 col-sm-12 col-md-8  mx-auto">
         {% for classe in classes %}
 
             <div class="classes">
@@ -32,16 +32,16 @@
                     {% if ("possui prazo de validade." in activity['deadline']) %}
                         <div class="inside" style = "">
 
-                            <p class="name-activity">
+                            <h4 class="name-activity">
                                 <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
-                            </p>
+                            </h4>
 
                     {% else %}
                         <div class="inside" style = "{% if  activity['time_left']['percent_time'] < 100 %} background-color:#FFE74C; {% endif %}">
 
-                            <p class="name-activity">
+                            <h4>
                                 <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
-                            </p>
+                            </h4>
 
                             <p class="days"><b>Tempo restante: {{ activity['time_left']['days_left'] }} dia(s).</b></p>
                             <div id="progressbar">
