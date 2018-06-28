@@ -25,7 +25,7 @@
             </div>
 
             <div class="jumbotron ">
-                <img id="image-donation" src="/styles/favicon.png" class="rounded mx-auto d-block" width="100px;" alt="...">
+                <img id="image" src="/styles/favicon.png" class="rounded mx-auto d-block" width="100px;" alt="...">
                 <form method="post">
                   <div class="form-group">
                     <label for="usuario">Usuário</label>
@@ -36,15 +36,15 @@
                     <label for="exampleInputPassword1">Senha</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="password" required value="">
                   </div>
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error.decode('utf-8') }}
+                        </div>
+                    {% endif %}
                   <button type="submit" class="btn btn-primary">Entrar</button>
                 </form>
             </div>
-            
-            {% if error %}
-            <div class="alert alert-danger" role="alert">
-              {{ error.decode('utf-8') }}
-            </div>
-            {% endif %}
+
 
     </div>
 
