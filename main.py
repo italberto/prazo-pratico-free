@@ -95,7 +95,7 @@ class Logged(webapp2.RequestHandler):
 class LogOut(webapp2.RequestHandler):
     """To make logout of the account, and clean the document.cookie"""
     def get(self):
-        self.response.headers['Set-Cookie'] = ''
+        self.response.headers['Set-Cookie'] = 'user=' + ' '
         self.response.out.write('')
         self.redirect('/login')
 
