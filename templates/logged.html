@@ -3,7 +3,7 @@
 {% block nav %}
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand " href="/logged">{{ username }}</a> 
+        <a class="navbar-brand " href="/logged">{{ username }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,48 +22,54 @@
 {% block content %}
 
     <div class="logged col-12 col-sm-12 col-md-8  mx-auto">
-        {% for classe in classes %}
+        {% if classes %}
+            {% for classe in classes %}
 
-            <div class="classes">
-                <h3>{{ classe['name'] | safe }}</h3>
+                <div class="classes">
+                    <h3 class="name-class">{{ classe['name'] | safe }}</h3>
 
-                {% for activity in classe['activities'] %}
+                    {% for activity in classe['activities'] %}
 
-                    {% if ("possui prazo de validade." in activity['deadline']) %}
-                        <div class="inside" style = "">
+                        {% if ("possui prazo de validade." in activity['deadline']) %}
+                            <div class="inside" style = "">
 
-                            <h4 class="name-activity">
-                                <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
-                            </h4>
+                                <h4 class="name-activity">
+                                    <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
+                                </h4>
 
-                    {% else %}
-                        <div class="inside" style = "{% if  activity['time_left']['percent_time'] < 100 %} background-color:#FFE74C; {% endif %}">
+                        {% else %}
+                            <div class="inside" style = "{% if  activity['time_left']['percent_time'] < 100 %} background-color:#FFE74C; {% endif %}">
 
-                            <h4>
-                                <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
-                            </h4>
+                                <h4>
+                                    <img src='/styles/{{ activity['type'] | safe}}.svg' ><b>{{ activity['name'] | safe}}</b>
+                                </h4>
 
-                            <p class="days"><b>Tempo restante: {{ activity['time_left']['days_left'] }} dia(s).</b></p>
-                            <div id="progressbar">
-                                <div style="width: {{ activity['time_left']['percent_time'] }}%; {% if activity['time_left']['percent_time'] == 100 %} background-color:#AFFC41; {% endif %}">{{ activity['time_left']['percent_time'] }}%</div>
-                            </div>
+                                <p class="days"><b>Tempo restante: {{ activity['time_left']['days_left'] }} dia(s).</b></p>
+                                <div id="progressbar">
+                                    <div style="width: {{ activity['time_left']['percent_time'] }}%; {% if activity['time_left']['percent_time'] == 100 %} background-color:#AFFC41; {% endif %}">{{ activity['time_left']['percent_time'] }}%</div>
+                                </div>
 
-                     {% endif %}
-
-
-
-                        <p class="deadline-activity">
-                            {{activity['deadline'] | safe}}
-                        </p>
+                         {% endif %}
 
 
 
-                    </div>
-                {% endfor %}
+                            <p class="deadline-activity">
+                                {{activity['deadline'] | safe}}
+                            </p>
 
-            </div>
 
 
-        {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+
+            {% endfor %}
+        {% else %}
+
+            <p class="h2">Não está cadastrado em nenhuma turma.</p>
+
+        {% endif %}
     </div>
 {% endblock %}

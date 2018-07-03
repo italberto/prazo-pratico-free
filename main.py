@@ -92,6 +92,7 @@ class Logged(webapp2.RequestHandler):
         else:
             self.redirect('/login')
 
+
 class LogOut(webapp2.RequestHandler):
     """To make logout of the account, and clean the document.cookie"""
     def get(self):

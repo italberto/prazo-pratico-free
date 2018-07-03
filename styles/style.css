@@ -7,7 +7,7 @@ nav {
 }
 
 .logo {
-    
+
 }
 
 .classes h1 {
@@ -22,14 +22,10 @@ nav {
 
 #image-donation {
     margin-bottom: 20px;
-    
+
 }
 #image {
     box-shadow: 5px 10px 8px #888888;
-}
-footer {
-    background-color: #343A40;
-    color: white;
 }
 
 
@@ -40,7 +36,13 @@ footer {
 }
 
 
-
+.name-class {
+    background-color: #343A40;
+    box-shadow: 5px 10px 8px #888888;
+    padding: 10px;
+    color: white;
+    margin-bottom: 10px;
+}
 
 
 logged {
@@ -99,5 +101,3 @@ logged {
 
 
 /*-----------------------------BOOTSTRAP---------------------------------*/
-
-
